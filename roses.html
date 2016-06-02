@@ -1,0 +1,109 @@
+ 
+<!DOCTYPE html>
+  <html lang = "en">
+ 
+  <head>
+      <title>Roses</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">  <meta charset="utf-8">
+                    <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+       </head>
+  <body>
+ 
+  <div class = "container">
+    <div class = "col-md-6 col-md-offset-3">
+      <h2>Rose Business</h2>
+      
+  <br/>
+<p>Balance</p>
+  <div id ="startingbalance"></div>
+		<br/>
+<p>Roses Sold That Day</p>
+  <div id ="rosesold"></div>
+		<br/>
+<p>Revenue For That Day</p>
+  <div id="revenue"></div>
+		<br/>
+<p>Profit or Loss For That Day</p>
+  <div id="dayprofit"></div>
+     <br>
+<p>Net Profit</p>
+  <div id="profit"></div>
+		<br>
+  <p>Days Worked:</p>
+<input type="text" id="daysWorked"/>
+<button type="button" class="btn btn-success" onclick="init()">Let's find out!</button>
+   
+ 
+ 
+  </div>
+</div>
+ 
+<script>
+ var bulkRoseBuy = (0.50 * 12 * 10);
+	 var retailRose = (2.0);
+	 var totalRosesStart = 120;
+	 var startingBalance = 200;
+	 var days = 7;
+	 var weeks = 52;
+	 var dailyprofits = [];
+	
+function init() {
+	 
+	 
+	 var dayzWrkd = document.getElementById('daysWorked').value;
+	 
+	
+	 for(var i=0; i<=dayzWrkd; i++){
+		 var min = 10;
+		 
+		 var max = 120;
+		 
+		 var dayOfSales = Math.random()*(max-min)+min;
+		 
+		 var dayOfSalesrounded = Math.round(dayOfSales);
+		 
+		 document.getElementById('rosesold').innerHTML += 'day ' + (i) + '- ' + dayOfSalesrounded + ' ';
+		 
+		 var dailyrevenue = (dayOfSalesrounded*retailRose);
+		 
+		 document.getElementById('revenue').innerHTML += 'day ' + (i) + '- ' + dailyrevenue + ' ';
+		 
+		 var dailyprofit = dailyrevenue - 60;
+		 
+		 dailyprofits.push(dailyprofit);
+		 
+		 console.log(dailyprofits);
+		 
+		 document.getElementById('dayprofit').innerHTML += 
+		 'day ' + (i) + '- ' + dailyprofit + ' ';
+		 
+		 var netprofit = dailyprofits.reduce(add,0);
+		 
+		 document.getElementById('profit').innerHTML =
+		 netprofit + ' ';
+		 
+		 var newbalance = startingBalance + netprofit;
+		 
+         document.getElementById('startingbalance').innerHTML += 'day ' + (i) + ' balance: ' + newbalance + ' ';
+		 
+		 if (newbalance<0) {
+			 break;
+		 }
+		 
+	 };
+	 
+ };
+
+function add(a,b) {
+	return a + b;
+}
+
+   
+ 
+      </script>
+      </body>
+</html>
+ 
+                   
